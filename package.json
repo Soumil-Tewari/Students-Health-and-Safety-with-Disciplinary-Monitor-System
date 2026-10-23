@@ -4,10 +4,13 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
+    "start:production": "npm run build && npm start",
     "dev": "node --watch src/server.js",
+    "dev:all": "node scripts/dev.cjs",
+    "render:build": "npm ci && npm --prefix frontend ci --include=dev && npm --prefix frontend run build",
     "create-admin": "node src/createAdmin.js",
     "seed": "node src/seedData.js",
-    "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "build": "npm --prefix frontend ci --include=dev && npm --prefix frontend run build",
     "dev:frontend": "npm --prefix frontend run dev"
   },
   "dependencies": {

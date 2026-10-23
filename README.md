@@ -14,7 +14,11 @@ To maintain a one-way SQLite-to-Neon replica, set `NEON_DATABASE_URL` in `.env`.
 the source of truth; the server creates the Neon schema, performs an initial sync, and schedules
 an asynchronous full sync after successful writes. Keep the connection string private and use
 Neon's pooled connection string when available.
-**Development with hot reload:** run `npm start` in one terminal and `npm run dev:frontend` in another, then open http://localhost:5173 (Vite proxies `/api` to port 3000).
+**Development with hot reload:** run `npm run dev:all` to start the backend and frontend together, then open http://localhost:5173 (Vite proxies `/api` to port 3000). Press `Ctrl+C` to stop both services.
+
+**Production deployment:** install the root dependencies with `npm ci`, set the required environment variables, then run `npm run start:production`. This installs the locked frontend dependencies, creates the production bundle, and starts the backend serving both the API and frontend on `PORT` (default `3000`). For deployments that build during an image/build phase, run `npm run build` during the build phase and use `npm start` as the runtime command.
+
+**Render deployment:** use the included [`render.yaml`](./render.yaml) Blueprint, or configure one Web Service with `Root Directory` blank, `Build Command` set to `npm run render:build`, and `Start Command` set to `npm start`. Render will build the React frontend once, then one Node process will serve the frontend and API together. Add `NEON_DATABASE_URL` in Render's environment variables if using Neon. SQLite data on the free instance is not persistent, so Neon should be configured for data that must survive redeploys or restarts.
 
 The SQLite file (`data/school.db`) and all tables are created automatically on first start.
 Back it up by copying that file while the server is stopped.
