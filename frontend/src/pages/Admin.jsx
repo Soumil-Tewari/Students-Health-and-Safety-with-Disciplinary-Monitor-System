@@ -5,9 +5,9 @@ import { Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, Bu
 import { api, msg, useCtx } from '../api.js';
 import { FormDialog } from './ResourcePage.jsx';
 
-const Grid = ({ cols, rows, extra }) => <Paper><TableContainer sx={{ maxHeight: '70vh' }}><Table size="small" stickyHeader><TableHead><TableRow>
+const Grid = ({ cols, rows, extra }) => <Paper><TableContainer sx={{ maxHeight: '70vh', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}><Table size="small" stickyHeader sx={{ minWidth: 620 }}><TableHead><TableRow>
   {cols.map(c => <TableCell key={c}>{c}</TableCell>)}{extra && <TableCell />}</TableRow></TableHead>
-  <TableBody>{rows.map((r, i) => <TableRow key={i}>{cols.map(c => <TableCell key={c}>{String(r[c] ?? '')}</TableCell>)}{extra && <TableCell>{extra(r)}</TableCell>}</TableRow>)}</TableBody></Table></TableContainer></Paper>;
+  <TableBody>{rows.map((r, i) => <TableRow key={i}>{cols.map(c => <TableCell key={c} sx={{ maxWidth: c === 'detail' ? 260 : 180, overflowWrap: 'anywhere' }}>{String(r[c] ?? '')}</TableCell>)}{extra && <TableCell>{extra(r)}</TableCell>}</TableRow>)}</TableBody></Table></TableContainer></Paper>;
 
 export function Users() {
   const { notify } = useCtx(), [rows, setRows] = useState([]), [form, setForm] = useState(false);
