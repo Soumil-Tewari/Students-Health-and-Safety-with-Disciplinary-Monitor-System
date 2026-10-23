@@ -76,9 +76,9 @@ export default function App() {
   return <Ctx.Provider value={{ meta, notify }}>
     <AppBar position="fixed" sx={{ zIndex: t => t.zIndex.drawer + 1 }}><Toolbar>
       <IconButton color="inherit" onClick={() => setOpen(!open)}><MenuIcon /></IconButton>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1, ml: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1, minWidth: 0, ml: 1 }}>
         <SchoolIcon sx={{ fontSize: 28 }} />
-        <Typography variant="h6" noWrap>Students Health and Safety with Disciplinary Monitor System</Typography>
+        <Typography variant="h6" noWrap sx={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis' }}>Students Health and Safety with Disciplinary Monitor System</Typography>
       </Box>
       {quick.length > 0 && <Button color="inherit" variant="outlined" startIcon={<AddIcon />} sx={{ mr: 1, whiteSpace: 'nowrap', flexShrink: 0, borderColor: 'rgba(255,255,255,.6)' }} onClick={e => setAnchor(e.currentTarget)}>New</Button>}
       <IconButton color="inherit" onClick={() => nav('/alerts')}><Badge badgeContent={unread} color="error"><NotificationsIcon /></Badge></IconButton>
