@@ -78,7 +78,7 @@ export default function App() {
       <IconButton color="inherit" onClick={() => setOpen(!open)}><MenuIcon /></IconButton>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1, ml: 1 }}>
         <SchoolIcon sx={{ fontSize: 28 }} />
-        <Typography variant="h6" noWrap>Student Health & Safety</Typography>
+        <Typography variant="h6" noWrap>Students Health and Safety with Disciplinary Monitor System</Typography>
       </Box>
       {quick.length > 0 && <Button color="inherit" variant="outlined" startIcon={<AddIcon />} sx={{ mr: 1, whiteSpace: 'nowrap', flexShrink: 0, borderColor: 'rgba(255,255,255,.6)' }} onClick={e => setAnchor(e.currentTarget)}>New</Button>}
       <IconButton color="inherit" onClick={() => nav('/alerts')}><Badge badgeContent={unread} color="error"><NotificationsIcon /></Badge></IconButton>

@@ -16,9 +16,9 @@ export function Users() {
   const [sp, setSp] = useSearchParams();
   useEffect(() => { if (sp.get('new')) { setForm(true); setSp({}, { replace: true }); } }, [sp]);
   const save = async v => { try { await api.post('/users', v); setForm(false); notify('User created'); load(); } catch (e) { notify(msg(e), 'error'); } };
-  const off = async id => { if (!confirm('Deactivate this user?')) return; try { await api.delete('/users/' + id); load(); } catch (e) { notify(msg(e), 'error'); } };
+  const remove = async id => { if (!confirm('Delete this user? The user will no longer be able to sign in.')) return; try { await api.delete('/users/' + id); notify('Deleted'); load(); } catch (e) { notify(msg(e), 'error'); } };
   return <><Box sx={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'center', mt: 1, mb: 3 }}><Typography variant="h5" noWrap sx={{ flex: 1 }}>User Management</Typography><Button variant="contained" startIcon={<AddIcon />} onClick={() => setForm(true)}>Add user</Button></Box>
-    <Grid cols={['name', 'email', 'role', 'active']} rows={rows} extra={r => r.active ? <Button size="small" color="error" onClick={() => off(r.user_id)}>Deactivate</Button> : null} />
+    <Grid cols={['name', 'email', 'role', 'active']} rows={rows} extra={r => r.active ? <Button size="small" color="error" onClick={() => remove(r.user_id)}>Delete</Button> : null} />
     <Fab variant="extended" color="primary" sx={{ position: 'fixed', right: 24, bottom: 24, zIndex: 1100 }} onClick={() => setForm(true)}><AddIcon sx={{ mr: 1 }} />Add user</Fab>
     {form && <FormDialog title="New user" initial={{ role: 'viewer' }} onClose={() => setForm(false)} onSave={save}
       fields={{ name: { r: 1 }, email: { r: 1, em: 1 }, password: { r: 1, pw: 1 }, role: { r: 1, e: ['admin', 'staff', 'medical', 'viewer'] } }} />}</>;

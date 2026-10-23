@@ -1,5 +1,5 @@
 {
-  "name": "school-frontend", "private": true, "version": "1.0.0", "type": "module",
+  "name": "students-health-and-safety-with-disciplinary-monitor-system-frontend", "private": true, "version": "1.0.0", "type": "module",
   "scripts": { "dev": "vite", "build": "vite build" },
   "dependencies": {
     "@emotion/react": "^11.13.0", "@emotion/styled": "^11.13.0",

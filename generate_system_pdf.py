@@ -17,7 +17,7 @@ GREEN = colors.HexColor("#15803d")
 
 pages = [
 ("Executive summary", [
-"Student Health & Safety is a role-aware school operations system for managing student welfare, health records, safety incidents, discipline cases, alerts, staff, parents, and audit history.",
+"Students Health and Safety with Disciplinary Monitor System is a role-aware school operations system for managing student welfare, health records, safety incidents, discipline cases, alerts, staff, parents, and audit history.",
 "SQLite is the authoritative operational database. Express exposes a protected REST API, while React and Material UI provide the responsive browser application. A one-way optional replica synchronizes SQLite into Neon PostgreSQL without changing the application source of truth.",
 "The design favors simple deployment, explicit authorization, archival instead of destructive deletion, and a generic metadata-driven resource UI."
 ]),
@@ -196,7 +196,7 @@ def header(c, title, page):
     c.rect(0, H - 18 * mm, W, 18 * mm, fill=1, stroke=0)
     c.setFillColor(colors.white)
     c.setFont("Helvetica-Bold", 10)
-    c.drawString(18 * mm, H - 11 * mm, "Student Health & Safety")
+    c.drawString(18 * mm, H - 11 * mm, "Students Health and Safety with Disciplinary Monitor System")
     c.setFont("Helvetica", 8)
     c.drawRightString(W - 18 * mm, H - 11 * mm, f"Technical Documentation  |  {page}/30")
     c.setFillColor(INK)
@@ -257,14 +257,14 @@ def er_diagram(c):
         box(c, x, y, w * mm, h * mm, label.replace("_", "\n"))
 
 c = canvas.Canvas(OUT, pagesize=A4)
-c.setTitle("Student Health & Safety System Technical Documentation")
+c.setTitle("Students Health and Safety with Disciplinary Monitor System Technical Documentation")
 
 # Cover
 c.setFillColor(NAVY); c.rect(0, 0, W, H, fill=1, stroke=0)
 c.setFillColor(BLUE); c.circle(W / 2, H * .67, 38 * mm, fill=1, stroke=0)
 c.setFillColor(colors.white); c.setFont("Helvetica-Bold", 48); c.drawCentredString(W / 2, H * .68, "SHS")
-c.setFont("Helvetica-Bold", 27); c.drawCentredString(W / 2, H * .49, "Student Health")
-c.drawCentredString(W / 2, H * .43, "& Safety System")
+c.setFont("Helvetica-Bold", 23); c.drawCentredString(W / 2, H * .49, "Students Health and Safety")
+c.drawCentredString(W / 2, H * .43, "with Disciplinary Monitor System")
 c.setFont("Helvetica", 13); c.setFillColor(colors.HexColor("#bfdbfe"))
 c.drawCentredString(W / 2, H * .34, "System design, technology, database, API, security")
 c.drawCentredString(W / 2, H * .30, "and operations documentation")

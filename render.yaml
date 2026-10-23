@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: school-system
+    name: students-health-and-safety-with-disciplinary-monitor-system
     env: node
     region: oregon
     plan: free

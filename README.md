@@ -1,4 +1,4 @@
-# Student Health & Safety with Disciplinary Monitoring (Node.js + Express + SQLite)
+# Students Health and Safety with Disciplinary Monitor System (Node.js + Express + SQLite)
 
 ## Windows setup (Node 22.13+ required; uses Node's built-in `node:sqlite`, so no C++ build tools are needed)
 ```powershell

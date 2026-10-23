@@ -37,8 +37,8 @@ function Inner({ k }) {
     try { form.id ? await api.put(`/${k}/${form.id}`, v) : await api.post('/' + k, v); setForm(null); notify('Saved'); load(); }
     catch (e) { notify(msg(e), 'error'); }
   };
-  const archive = async () => {
-    try { await api.delete(`/${k}/${del}`); setDel(null); notify('Archived'); load(); } catch (e) { notify(msg(e), 'error'); }
+  const remove = async () => {
+    try { await api.delete(`/${k}/${del}`); setDel(null); notify('Deleted'); load(); } catch (e) { notify(msg(e), 'error'); }
   };
   return <>
     <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mt: 1, mb: 3, pb: 1, flexWrap: 'nowrap', overflowX: 'auto', '& > *': { flexShrink: 0 } }}>
@@ -57,16 +57,16 @@ function Inner({ k }) {
         {cols.map(c => <TableCell key={c} sx={{ maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r[c]}</TableCell>)}
         <TableCell sx={{ whiteSpace: 'nowrap' }}><Button size="small" onClick={() => nav(`/${k}/${r[m.pk]}`)}>View</Button>
           {m.canWrite && <><Button size="small" onClick={() => setForm({ id: r[m.pk], v: Object.fromEntries(Object.keys(m.fields).map(f => [f, r[f]])) })}>Edit</Button>
-            <Button size="small" color="error" onClick={() => setDel(r[m.pk])}>Archive</Button></>}</TableCell></TableRow>)}
+            <Button size="small" color="error" onClick={() => setDel(r[m.pk])}>Delete</Button></>}</TableCell></TableRow>)}
         {!busy && !d.data.length && <TableRow><TableCell colSpan={cols.length + 1} align="center" sx={{ py: 4, color: 'text.secondary' }}>No records found</TableCell></TableRow>}</TableBody></Table></TableContainer>
       {busy && <LinearProgress />}
       <TablePagination component="div" count={d.total} page={s.page} rowsPerPage={s.size} rowsPerPageOptions={[10, 25, 50]}
         onPageChange={(_, p) => setS({ ...s, page: p })} onRowsPerPageChange={e => set({ size: +e.target.value })} /></Paper>
     {m.canWrite && <Fab variant="extended" color="primary" sx={{ position: 'fixed', right: 24, bottom: 24, zIndex: 1100 }} onClick={() => setForm({ v: {} })}><AddIcon sx={{ mr: 1 }} />Add {LABEL[k]}</Fab>}
     {form && <FormDialog title={`${form.id ? 'Edit' : 'Add'} ${k}`} fields={m.fields} initial={form.v} onClose={() => setForm(null)} onSave={save} />}
-    <Dialog open={del != null} onClose={() => setDel(null)}><DialogTitle>Archive this record?</DialogTitle>
-      <DialogContent>It will be hidden from lists but kept in the database.</DialogContent>
-      <DialogActions><Button onClick={() => setDel(null)}>Cancel</Button><Button color="error" onClick={archive}>Archive</Button></DialogActions></Dialog>
+    <Dialog open={del != null} onClose={() => setDel(null)}><DialogTitle>Delete this record?</DialogTitle>
+      <DialogContent>This record will be removed from active lists and retained in the database for audit and relationship integrity.</DialogContent>
+      <DialogActions><Button onClick={() => setDel(null)}>Cancel</Button><Button color="error" onClick={remove}>Delete</Button></DialogActions></Dialog>
   </>;
 }
 
